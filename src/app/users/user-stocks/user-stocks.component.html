@@ -1,1 +1,37 @@
-<p>user-stocks works!</p>
+<h1>Stocks User</h1>
+<a class="btn btn-outline-success mb-3">Add</a>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Symbol</th>
+            <th>Price</th>
+            <th>previousClosed</th>
+            <th>ChangePrice</th>
+            <th>ChangeInPercent</th>
+            <th>Volume</th>
+            <th>Classify</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let stock of stocks"> <!-- repeat the tr for each room -->
+            <td>{{ stock.id }}</td>
+            <td>{{ stock.name }}</td>
+            <td>{{ stock.symbol }}</td>
+            <td>{{ stock.price }}</td>
+            <td>{{ stock.previousClosed }}</td>
+            <td>{{ stock.changePrice }}</td>
+            <td>{{ stock.changeInPercent }}</td>
+            <td>{{ stock.volume }}</td>
+            <td>{{ stock.classify.name }}</td>
+            <td>
+              <button type="button" class="btn btn-outline-primary" (click)="navigateToAdd(stock.id)">Add to Watch</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
