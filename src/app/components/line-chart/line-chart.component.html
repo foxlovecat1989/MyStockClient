@@ -1,0 +1,14 @@
+<div class="flex">
+  <div class="flex-item">
+    <div style="display: block;">
+    <canvas baseChart width="200" height="50"
+                [datasets]="lineChartData"
+                [labels]="lineChartLabels"
+                [options]="lineChartOptions"
+                [colors]="lineChartColors"
+                [legend]="lineChartLegend"
+                [chartType]="lineChartType">
+    </canvas>
+    </div>
+    <button mat-button mat-raised-button color="primary" (click)="pushOne()">Push</button>
+  </div>
