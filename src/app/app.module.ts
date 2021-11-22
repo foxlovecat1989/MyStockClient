@@ -18,6 +18,7 @@ import { ClassifyComponent } from './admins/admin/classify/classify.component';
 import { AdminStockEditComponent } from './admins/admin/admin-stock-edit/admin-stock-edit.component';
 import { ClassifyDetailComponent } from './admins/admin/classify/classify-detail/classify-detail.component';
 import { ClassifyEditComponent } from './admins/admin/classify/classify-edit/classify-edit.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +39,9 @@ import { ClassifyEditComponent } from './admins/admin/classify/classify-edit/cla
     BrowserModule,
     AppRoutingModule,
     ChartsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
