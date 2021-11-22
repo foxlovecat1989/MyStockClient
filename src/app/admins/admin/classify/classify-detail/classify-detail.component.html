@@ -1,0 +1,26 @@
+<h1>{{ classify.name }}</h1>
+  <div class="row">
+    <div class="col-md-4">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Stock ID</th>
+            <th>Name</th>
+            <th>Symbol</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let stock of stocks">
+            <td>{{ stock.id }}</td>
+            <td>{{ stock.name }}</td>
+            <td>
+              <button type="button" class="btn btn-secondary">Edit</button>
+            </td>
+            <td>
+              <button type="button" class="btn btn-danger" >Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

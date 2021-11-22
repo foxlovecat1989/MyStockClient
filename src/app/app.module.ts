@@ -13,6 +13,11 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminStockDetailComponent } from './admins/admin/admin-stock-detail/admin-stock-detail.component';
 import { AdminStocksComponent } from './admins/admin/admin-stocks/admin-stocks.component';
+import { ClassifyComponent } from './admins/admin/classify/classify.component';
+
+import { AdminStockEditComponent } from './admins/admin/admin-stock-edit/admin-stock-edit.component';
+import { ClassifyDetailComponent } from './admins/admin/classify/classify-detail/classify-detail.component';
+import { ClassifyEditComponent } from './admins/admin/classify/classify-edit/classify-edit.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +28,11 @@ import { AdminStocksComponent } from './admins/admin/admin-stocks/admin-stocks.c
     PageNotfoundComponent,
     NavBarComponent,
     AdminStockDetailComponent,
-    AdminStocksComponent
+    AdminStocksComponent,
+    ClassifyComponent,
+    ClassifyEditComponent,
+    AdminStockEditComponent,
+    ClassifyDetailComponent
   ],
   imports: [
     BrowserModule,

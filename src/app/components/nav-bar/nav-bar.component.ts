@@ -21,4 +21,9 @@ export class NavBarComponent implements OnInit {
     this.route.navigate(['users', 'stocks']);
   }
 
+  navigateAdminClassifies(){
+    this.route.navigate(['admins', 'admin', 'classifies']);
+
+  }
+
 }
