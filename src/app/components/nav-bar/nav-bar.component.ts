@@ -25,5 +25,7 @@ export class NavBarComponent implements OnInit {
     this.route.navigate(['admins', 'admin', 'classifies']);
 
   }
-
+  navigateToHome(){
+    this.route.navigate(['']);
+  }
 }
