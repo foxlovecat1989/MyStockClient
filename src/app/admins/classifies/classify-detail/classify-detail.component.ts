@@ -29,7 +29,7 @@ export class ClassifyDetailComponent implements OnInit {
   }
 
   edit(id: number){
-    this.router.navigate(['admins', 'admin', 'classifies'], {queryParams: {action: 'edit', id: id}});
+    this.router.navigate(['admins', 'classifies'], {queryParams: {action: 'edit', id: id}});
   }
 
   delete(id: number){

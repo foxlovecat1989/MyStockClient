@@ -9,9 +9,9 @@ import { UserStocksComponent } from './users/user-stocks/user-stocks.component';
 
 const routes: Routes = [
   {path: '', component: CalendarComponent},
-  {path: 'admins/admin/stocks', component: AdminStocksComponent},
-  {path: 'admins/admin/classifies', component: ClassifyComponent},
-  {path: 'admins/admin/users', component: AdminManageUsersComponent},
+  {path: 'admins/stocks', component: AdminStocksComponent},
+  {path: 'admins/classifies', component: ClassifyComponent},
+  {path: 'admins/users', component: AdminManageUsersComponent},
   {path: 'users/stocks', component: UserStocksComponent},
   {path: '404', component: PageNotFoundComponent},
   {path: '**', redirectTo: '/404'}

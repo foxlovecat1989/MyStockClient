@@ -28,7 +28,7 @@ export class AdminStockDetailComponent implements OnInit {
   }
 
   edit(){
-    this.router.navigate(['admins', 'admin', 'stocks'], {queryParams: {action: 'edit', id: this.stock.id}});
+    this.router.navigate(['admins', 'stocks'], {queryParams: {action: 'edit', id: this.stock.id}});
   }
 
   delete(){
@@ -36,7 +36,7 @@ export class AdminStockDetailComponent implements OnInit {
     this.dataService.deleteStock(this.stock.id).subscribe(
       data => {
         this.dataReloadEvent.emit();
-        this.router.navigate(['admins', 'admin', 'stocks']);
+        this.router.navigate(['admins', 'stocks']);
       },
       error => {
         this.message = 'Something went wrong, please try again...';

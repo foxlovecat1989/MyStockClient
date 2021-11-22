@@ -56,11 +56,11 @@ export class AdminManageUsersComponent implements OnInit {
   }
 
   view(id: number){
-    this.router.navigate(['admins', 'admin', 'users'], {queryParams: {action: 'view', id: id}});
+    this.router.navigate(['admins', 'users'], {queryParams: {action: 'view', id: id}});
   }
 
   edit(id: number){
-    this.router.navigate(['admins', 'admin', 'users'], {queryParams: {action: 'edit', id: id}});
+    this.router.navigate(['admins', 'users'], {queryParams: {action: 'edit', id: id}});
   }
 
   add(){

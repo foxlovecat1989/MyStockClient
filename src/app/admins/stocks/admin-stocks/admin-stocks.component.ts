@@ -54,11 +54,11 @@ export class AdminStocksComponent implements OnInit {
   }
 
   view(id: number) {
-    this.router.navigate(['admins', 'admin', 'stocks'], {queryParams: {action: 'view', id: id}});
+    this.router.navigate(['admins', 'stocks'], {queryParams: {action: 'view', id: id}});
   }
 
   add() {
-    this.router.navigate(['admins', 'admin', 'stocks'], {queryParams: {action: 'add'}});
+    this.router.navigate(['admins', 'stocks'], {queryParams: {action: 'add'}});
   }
 
 }

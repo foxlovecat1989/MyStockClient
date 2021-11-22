@@ -14,7 +14,7 @@ export class NavBarComponent implements OnInit {
   }
 
   navigateAdminStocks(){
-    this.route.navigate(['admins', 'admin', 'stocks']);
+    this.route.navigate(['admins', 'stocks']);
   }
 
   navigateUserStocks(){
@@ -22,11 +22,11 @@ export class NavBarComponent implements OnInit {
   }
 
   navigateAdminClassifies(){
-    this.route.navigate(['admins', 'admin', 'classifies']);
+    this.route.navigate(['admins', 'classifies']);
   }
 
   navigateAdminUsers(){
-    this.route.navigate(['admins', 'admin', 'users']);
+    this.route.navigate(['admins', 'users']);
   }
 
   navigateToHome(){

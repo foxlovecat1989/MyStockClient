@@ -78,7 +78,7 @@ export class AdminStockEditComponent implements OnInit {
       stock => {
         this.stock = stock;
         this.dataReloadEvent.emit();
-        this.router.navigate(['admins', 'admin', 'stocks'], { queryParams: { action: 'view', id: this.stock.id } });
+        this.router.navigate(['admins', 'stocks'], { queryParams: { action: 'view', id: this.stock.id } });
       },
       error => this.message = 'Fail to Save data...'
     );
@@ -89,7 +89,7 @@ export class AdminStockEditComponent implements OnInit {
       stock => {
         this.stock = stock;
         this.dataReloadEvent.emit();
-        this.router.navigate(['admins', 'admin', 'stocks'], { queryParams: { action: 'view', id: this.stock.id } });
+        this.router.navigate(['admins', 'stocks'], { queryParams: { action: 'view', id: this.stock.id } });
       },
       error => this.message = 'Fail to Save data...'
     );

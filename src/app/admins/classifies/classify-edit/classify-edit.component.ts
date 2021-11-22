@@ -55,7 +55,7 @@ export class ClassifyEditComponent implements OnInit {
       classify => {
         this.classify = classify;
         this.dataChangeEvent.emit();
-        this.router.navigate(['admins', 'admin', 'classifies'], { queryParams: { action: 'view', id: this.classify.classifyId } });
+        this.router.navigate(['admins', 'classifies'], { queryParams: { action: 'view', id: this.classify.classifyId } });
       },
       error => this.message = 'Fail to Save Edit Classify'
     );
@@ -66,7 +66,7 @@ export class ClassifyEditComponent implements OnInit {
       classify => {
         this.classify = classify;
         this.dataChangeEvent.emit();
-        this.router.navigate(['admins', 'admin', 'classifies'], { queryParams: { action: 'view', id: this.classify.classifyId } });
+        this.router.navigate(['admins', 'classifies'], { queryParams: { action: 'view', id: this.classify.classifyId } });
       },
       error => this.message = 'Fail to Save Add Classify'
     );

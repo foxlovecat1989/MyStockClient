@@ -62,11 +62,11 @@ export class ClassifyComponent implements OnInit {
   }
 
   view(id: number){
-    this.router.navigate(['admins', 'admin', 'classifies'], {queryParams: {id: id, action: 'view'}});
+    this.router.navigate(['admins', 'classifies'], {queryParams: {id: id, action: 'view'}});
   }
 
   add(){
-    this.router.navigate(['admins', 'admin', 'classifies'], {queryParams: {action: 'add'}});
+    this.router.navigate(['admins', 'classifies'], {queryParams: {action: 'add'}});
   }
 
 
