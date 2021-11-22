@@ -25,8 +25,8 @@
       </table>
     </div>
     <div class="col-md-6">
-      <admin-stock-detail *ngIf="action==='view'" [stock]=selectedStock (dataReloadEvent)="loadingData()"></admin-stock-detail>
-      <admin-stock-edit *ngIf="action==='edit' || action==='add'" [stock]=selectedStock (dataReloadEvent)="loadingData()"></admin-stock-edit>
+      <admin-stock-detail *ngIf="action==='view'" [stock]="selectedStock" (dataReloadEvent)="loadingData()"></admin-stock-detail>
+      <admin-stock-edit *ngIf="action==='edit' || action==='add'" [stock]="selectedStock" (dataReloadEvent)="loadingData()"></admin-stock-edit>
     </div>
   </div>
   <div class="bg-light p-4" *ngIf="isLoadingData">{{ message }}</div>
