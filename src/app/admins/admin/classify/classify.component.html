@@ -1,26 +1,37 @@
-<h1>Classify</h1>
-<a class="btn btn-outline-success mb-3" (click)="navigateToAdd()">Add</a>
-  <div class="row">
-    <div class="col-md-4">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let classify of classifies">
-            <td>{{ classify.classifyId }}</td>
-            <td>{{ classify.name }}</td>
-            <td>
-              <button type="button" class="btn btn-outline-primary" (click)="navigateToView(classify.classifyId)">view</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+
+  <h1>Classify</h1>
+  <a class="btn btn-outline-success mb-3" (click)="add()">Add</a>
+    <div class="row mb-3">
+      <div class="col-md-4">
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let classify of classifies">
+              <td>{{ classify?.classifyId }}</td>
+              <td>{{ classify?.name }}</td>
+              <td>
+                <button type="button" class="btn btn-outline-primary" (click)="view(classify.classifyId)">View</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-7 offset-md-1">
+        <classify-detail
+            *ngIf="action==='view'"
+            [classify]="selectedClassify"
+            [stocks]="stocks"
+            [isLoadingData]="isChildLoadingData"
+            [message]="toChildMessage"
+            (dataChangeEvent)="loadingData()">
+        </classify-detail>
+        <classify-edit *ngIf="action==='edit' || action==='add'" [classify]="selectedClassify" (dataChangeEvent)="loadingData()"></classify-edit>
+      </div>
     </div>
-    <div class="col-md-8">
-      <classify-detail *ngIf="action==='view'" [classify]="selectedClassify" [stocks]="stocks"></classify-detail>
-    </div>
-  </div>
+    <div class="bg-light p-4" *ngIf="isLoadingData">{{ message }}</div>

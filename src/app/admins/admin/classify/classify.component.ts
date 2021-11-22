@@ -15,6 +15,10 @@ export class ClassifyComponent implements OnInit {
   action!: string;
   selectedClassify!: Classify;
   stocks!:Array<Stock>;
+  message = 'Loading data, please wait...';
+  isLoadingData = true;
+  isChildLoadingData = false;
+  toChildMessage = '';
 
   constructor(
     private dataService: DataService,
@@ -26,17 +30,16 @@ export class ClassifyComponent implements OnInit {
     this.loadingData();
   }
 
-  private loadingData() {
+  public loadingData() {
     this.dataService.getClassifies().subscribe(
       classify => {
+        this.isLoadingData = false;
+        this.message = '';
         this.classifies = classify;
+        this.subscribeQueryParams();
       },
-      error => {
-        console.log('error', error);
-      }
+      error => this.message = 'Fail to Load Data...'
     );
-
-    this.subscribeQueryParams();
   }
 
   private subscribeQueryParams() {
@@ -44,32 +47,37 @@ export class ClassifyComponent implements OnInit {
       params => {
         const id = params['id'];
         this.action = params['action'];
-        if (id) {
-          this.selectedClassify = this.classifies.find(classify => classify.classifyId === +id)!;
-          this.getStocksByClassifyId();
-        } else {
+        if(id){  // under view or edit mode
+            this.isChildLoadingData = true;
+            this.toChildMessage = 'Loading Data, please wait...';
+            this.selectedClassify = this.classifies.find(classify => classify.classifyId === +id)!;
+            if (this.action === 'view' && this.selectedClassify)  // because of delay - selectedClassify could be null tempory
+              this.getStocksByClassifyId();
+        } else{   // under add mode
           this.selectedClassify = new Classify();
         }
-      }
+      },
+      error => this.message = 'Get QueryParams Fails'
     );
   }
 
-  navigateToView(id: number){
+  view(id: number){
     this.router.navigate(['admins', 'admin', 'classifies'], {queryParams: {id: id, action: 'view'}});
   }
 
-  navigateToAdd(){
+  add(){
     this.router.navigate(['admins', 'admin', 'classifies'], {queryParams: {action: 'add'}});
   }
+
 
   private getStocksByClassifyId() {
     this.dataService.findStocksByClassifyId(this.selectedClassify.classifyId).subscribe(
       stocks => {
         this.stocks = stocks;
+        this.isChildLoadingData = false;
+        this.toChildMessage = '';
       },
-      error => {
-        console.log('findStocksByClassifyId fail', error);
-      }
+      error => this.message = 'Get Stocks Fail...'
     );
   }
 }

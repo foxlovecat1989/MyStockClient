@@ -28,6 +28,10 @@ export class DataService {
     return this.http.delete(environment.restUrl + '/api/v1/stocks/' + id);
   }
 
+  public findStocksByClassifyId(classifyId: number): Observable<Array<Stock>> {
+    return this.http.get<Array<Stock>>(environment.restUrl + '/api/v1/classifies/' + classifyId);
+  }
+
   public addStockToWatch(stockId: number, watchId: number, userId: number): Observable<any> {
     // TODO: add stock to watch beackend
     return of(null);
@@ -47,7 +51,12 @@ export class DataService {
     );
   }
 
-  public findStocksByClassifyId(classifyId: number): Observable<Array<Stock>> {
-    return this.http.get<Array<Stock>>(environment.restUrl + '/api/v1/classifies/' + classifyId);
+  public updateClassify(classify: Classify): Observable<Classify> {
+    return this.http.patch<Classify>(environment.restUrl + '/api/v1/classifies', classify);
   }
+
+  public addClassify(classify: Classify): Observable<Classify> {
+    return this.http.post<Classify>(environment.restUrl + '/api/v1/classifies', classify);
+  }
+
 }

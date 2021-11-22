@@ -1,7 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Observable, of, Subscription } from 'rxjs';
-import { DataService } from 'src/app/data.service';
+import { Router } from '@angular/router';
 import { Classify } from 'src/app/model/Classify';
 import { Stock } from 'src/app/model/Stock';
 
@@ -15,12 +13,26 @@ export class ClassifyDetailComponent implements OnInit {
   @Input('classify')
   classify!: Classify;
 
+  @Input('isLoadingData')
+  isLoadingData!: boolean;
+
+  @Input('message')
+  message!: string;
+
   @Input('stocks')
   stocks!: Array<Stock>;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+
+  }
+
+  edit(id: number){
+    this.router.navigate(['admins', 'admin', 'classifies'], {queryParams: {action: 'edit', id: id}});
+  }
+
+  delete(id: number){
 
   }
 }
