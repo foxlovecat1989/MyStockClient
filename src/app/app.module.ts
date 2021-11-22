@@ -15,12 +15,12 @@ import { ClassifyComponent } from './admins/classifies/classify.component';
 import { ClassifyDetailComponent } from './admins/classifies/classify-detail/classify-detail.component';
 import { ClassifyEditComponent } from './admins/classifies/classify-edit/classify-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AdminStockEditComponent } from './admins/stocks/admin-stock-edit/admin-stock-edit.component';
 import { AdminStocksComponent } from './admins/stocks/admin-stocks/admin-stocks.component';
 import { AdminManageUserDetailComponent } from './admins/users/admin-manage-user-detail/admin-manage-user-detail.component';
 import { AdminManageUserEditComponent } from './admins/users/admin-manage-user-edit/admin-manage-user-edit.component';
 import { AdminManageUsersComponent } from './admins/users/admin-manage-users/admin-manage-users.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
