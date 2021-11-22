@@ -1,3 +1,4 @@
+<div *ngIf="stock != null">
 <h1>{{ stock.name +' '+stock.symbol}}</h1>
   <div class="row">
     <div class="col-md-4">
@@ -17,13 +18,15 @@
             <td>{{ stock.symbol }}</td>
             <td>{{ stock.classify.name }}</td>
             <td>
-              <button type="button" class="btn btn-secondary" (click)="editStock()">Edit</button>
+              <button type="button" class="btn btn-secondary" (click)="edit()">Edit</button>
             </td>
             <td>
-              <button type="button" class="btn btn-danger" (click)="deleteStock()">Delete</button>
+              <button type="button" class="btn btn-danger" (click)="delete()">Delete</button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
+</div>
+<div *ngIf="message != ''">{{ message }}</div>

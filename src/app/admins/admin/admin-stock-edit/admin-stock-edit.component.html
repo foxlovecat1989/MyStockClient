@@ -1,1 +1,34 @@
-<p>admin-stock-edit works!</p>
+<div *ngIf="!isLoadingData && message != null">
+  <h1> {{stock.id == null ? 'Add' : 'Edit'}} Stock</h1>
+  <div>
+    <form [formGroup]="stockForm">
+      <div class="form-group mb-3">
+        <label for="id" class="form-label">ID</label>
+        <input class="form-control" type="text" id="id" placeholder="id" formControlName="id" aria-label="id" readonly>
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="stock name" formControlName="stockName" required>
+        <div class="alert alert-danger" *ngIf="stockForm.controls['stockName'].invalid && stockForm.controls['stockName'].touched">Name is required</div>
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="symbol" class="form-label">Symbol</label>
+        <input type="text" class="form-control" id="symbol" placeholder="symbol" formControlName="symbol" required>
+        <div class="alert alert-danger" *ngIf="stockForm.controls['symbol'].invalid && stockForm.controls['symbol'].touched">Symbol is required</div>
+      </div>
+
+      <h2>Classify:</h2>
+      <div class="form-group mb-3">
+        <select formControlName="classify">
+          <option [ngValue]="null" disabled>Choose classify</option>
+          <option *ngFor="let classify of classifies" [ngValue]="classify">{{ classify.name }}</option>
+        </select>
+      </div>
+
+      <button type="button" class="btn btn-primary" (click)="save()" [disabled]="stockForm.invalid">Save</button>
+    </form>
+  </div>
+</div>
+<div class="bg-light p-3" *ngIf="message != ''">{{ message }}</div>

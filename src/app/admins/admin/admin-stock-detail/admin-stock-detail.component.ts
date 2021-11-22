@@ -1,5 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { DataService } from 'src/app/data.service';
 import { Stock } from 'src/app/model/Stock';
+
 
 @Component({
   selector: 'admin-stock-detail',
@@ -8,20 +11,37 @@ import { Stock } from 'src/app/model/Stock';
 })
 export class AdminStockDetailComponent implements OnInit {
 
-  @Input()
+  @Input('stock')
   stock!: Stock;
 
-  constructor() { }
+  @Output('dataReloadEvent')
+  dataReloadEvent = new EventEmitter();
+
+  message = '';
+
+  constructor(
+    private dataService: DataService,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
   }
 
-  editStock(){
-
+  edit(){
+    this.router.navigate(['admins', 'admin', 'stocks'], {queryParams: {action: 'edit', id: this.stock.id}});
   }
 
-  deleteStock(){
-
+  delete(){
+    this.message = 'Deleting data, please wait...';
+    this.dataService.deleteStock(this.stock.id).subscribe(
+      data => {
+        this.dataReloadEvent.emit();
+        this.router.navigate(['admins', 'admin', 'stocks']);
+      },
+      error => {
+        this.message = 'Something went wrong, please try again...';
+      }
+    );
   }
 
 }

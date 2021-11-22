@@ -1,15 +1,97 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { DataService } from 'src/app/data.service';
+import { Classify } from 'src/app/model/Classify';
+import { Stock } from 'src/app/model/Stock';
 
 @Component({
-  selector: 'app-admin-stock-edit',
+  selector: 'admin-stock-edit',
   templateUrl: './admin-stock-edit.component.html',
   styleUrls: ['./admin-stock-edit.component.css']
 })
 export class AdminStockEditComponent implements OnInit {
 
-  constructor() { }
+  @Input('stock')
+  stock!: Stock;
+  @Output('dataReloadEvent')
+  dataReloadEvent = new EventEmitter();
+  isLoadingData = true;
+  classifies!: Array<Classify>;
+  message= 'Loading Data, please wait...';
+  stockForm!: FormGroup;
+
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private dataService: DataService,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
+    this.loadingData();
+
   }
 
+  private loadingData() {
+    this.dataService.getClassifies().subscribe(
+      classifies => {
+        this.classifies = classifies;
+        this.initForm();
+      },
+      error => {
+        this.message = 'Fail to lode data...'
+      }
+    );
+  }
+
+  private initForm() {
+    this.stockForm = this.formBuilder.group({
+      id: this.stock.id,
+      stockName: [this.stock.name, Validators.required],
+      symbol: [this.stock.symbol, Validators.required]
+    });
+
+    this.classifies.forEach(
+      classify => this.stockForm.addControl("classify", this.formBuilder.control(classify))
+    );
+
+    this.isLoadingData = false;
+    this.message = '';
+  }
+
+  save(){
+    this.stock.name = this.stockForm.controls['stockName'].value;
+    this.stock.symbol = this.stockForm.controls['symbol'].value;
+    this.stock.classify = this.stockForm.controls['classify'].value;
+    this.message = 'Saving data, please wait...';
+    if(this.stock.id)
+      this.saveEditStock();
+    else{
+      this.saveAddStock();
+    }
+  }
+
+
+  private saveEditStock() {
+    this.dataService.updateStock(this.stock).subscribe(
+      stock => {
+        this.stock = stock;
+        this.dataReloadEvent.emit();
+        this.router.navigate(['admins', 'admin', 'stocks'], { queryParams: { action: 'view', id: this.stock.id } });
+      },
+      error => this.message = 'Fail to Save data...'
+    );
+  }
+
+  private saveAddStock() {
+    this.dataService.addStock(this.stock).subscribe(
+      stock => {
+        this.stock = stock;
+        this.dataReloadEvent.emit();
+        this.router.navigate(['admins', 'admin', 'stocks'], { queryParams: { action: 'view', id: this.stock.id } });
+      },
+      error => this.message = 'Fail to Save data...'
+    );
+  }
 }

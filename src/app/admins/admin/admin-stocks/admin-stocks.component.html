@@ -1,5 +1,5 @@
 <h1>Stocks Admin</h1>
-<a class="btn btn-outline-success mb-3">Add</a>
+<a class="btn btn-outline-success mb-3" (click)="add()">Add</a>
   <div class="row">
     <div class="col-md-6">
       <table class="table">
@@ -12,19 +12,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let stock of stocks"> <!-- repeat the tr for each room -->
+          <tr *ngFor="let stock of stocks">
             <td>{{ stock.id }}</td>
             <td>{{ stock.name }}</td>
             <td>{{ stock.symbol }}</td>
             <td>{{ stock.classify.name }}</td>
             <td>
-              <button type="button" class="btn btn-outline-primary" (click)="navigateToView(stock.id)">view</button>
+              <button type="button" class="btn btn-outline-primary" (click)="view(stock.id)">view</button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="col-md-6">
-      <admin-stock-detail *ngIf="action==='view'" [stock]=selectedStock ></admin-stock-detail>
+      <admin-stock-detail *ngIf="action==='view'" [stock]=selectedStock (dataReloadEvent)="loadingData()"></admin-stock-detail>
+      <admin-stock-edit *ngIf="action==='edit' || action==='add'" [stock]=selectedStock (dataReloadEvent)="loadingData()"></admin-stock-edit>
     </div>
   </div>
+  <div class="bg-light p-4" *ngIf="isLoadingData">{{ message }}</div>

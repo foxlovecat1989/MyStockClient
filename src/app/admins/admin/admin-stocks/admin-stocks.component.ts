@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from 'src/app/data.service';
 import { Stock } from 'src/app/model/Stock';
 @Component({
@@ -11,11 +11,13 @@ export class AdminStocksComponent implements OnInit {
   action!: string;
   stocks!: Array<Stock>;
   selectedStock!: Stock;
+  isLoadingData = true;
+  message = 'Loading data, please wait...';
 
   constructor(
     private dataService: DataService,
     private activatedRoute: ActivatedRoute,
-    private route: Router
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -35,22 +37,28 @@ export class AdminStocksComponent implements OnInit {
   private setSelectedStock(id: number) {
     if (id)   // under edit mode
       this.selectedStock = this.stocks.find(stock => stock.id === +id)!;
-    else{
+    else{     // under add mode
       this.selectedStock = new Stock();
     }
   }
 
-  private loadingData() {
+  public loadingData() {
     this.dataService.getStocks().subscribe(
       stocks => {
         this.stocks = stocks;
+        this.isLoadingData = false;
+        this.message = '';
         this.subscribeQueryParams();
       }
     );
   }
 
-  navigateToView(id: number) {
-    this.route.navigate(['admins', 'admin', 'stocks'], {queryParams: {action: 'view', id: id}});
+  view(id: number) {
+    this.router.navigate(['admins', 'admin', 'stocks'], {queryParams: {action: 'view', id: id}});
+  }
+
+  add() {
+    this.router.navigate(['admins', 'admin', 'stocks'], {queryParams: {action: 'add'}});
   }
 
 }
