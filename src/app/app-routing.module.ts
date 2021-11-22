@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminManageUsersComponent } from './admins/admin/user/admin-manage-users/admin-manage-users.component';
-import { AdminStocksComponent } from './admins/admin/admin-stocks/admin-stocks.component';
-import { ClassifyComponent } from './admins/admin/classify/classify.component';
+import { ClassifyComponent } from './admins/classifies/classify.component';
+import { AdminStocksComponent } from './admins/stocks/admin-stocks/admin-stocks.component';
+import { AdminManageUsersComponent } from './admins/users/admin-manage-users/admin-manage-users.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { UserStocksComponent } from './users/user-stocks/user-stocks.component';

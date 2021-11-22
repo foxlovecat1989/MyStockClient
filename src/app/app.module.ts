@@ -10,18 +10,18 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { UserComponent } from './users/user/user.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { HttpClientModule } from '@angular/common/http';
-import { AdminStockDetailComponent } from './admins/admin/admin-stock-detail/admin-stock-detail.component';
-import { AdminStocksComponent } from './admins/admin/admin-stocks/admin-stocks.component';
-import { ClassifyComponent } from './admins/admin/classify/classify.component';
-
-import { AdminStockEditComponent } from './admins/admin/admin-stock-edit/admin-stock-edit.component';
-import { ClassifyDetailComponent } from './admins/admin/classify/classify-detail/classify-detail.component';
-import { ClassifyEditComponent } from './admins/admin/classify/classify-edit/classify-edit.component';
+import { AdminStockDetailComponent } from './admins/stocks/admin-stock-detail/admin-stock-detail.component';
+import { ClassifyComponent } from './admins/classifies/classify.component';
+import { ClassifyDetailComponent } from './admins/classifies/classify-detail/classify-detail.component';
+import { ClassifyEditComponent } from './admins/classifies/classify-edit/classify-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AdminManageUsersComponent } from './admins/admin/user/admin-manage-users/admin-manage-users.component';
-import { AdminManageUserDetailComponent } from './admins/admin/user/admin-manage-user-detail/admin-manage-user-detail.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { AdminManageUserEditComponent } from './admins/admin/user/admin-manage-user-edit/admin-manage-user-edit.component';
+import { AdminStockEditComponent } from './admins/stocks/admin-stock-edit/admin-stock-edit.component';
+import { AdminStocksComponent } from './admins/stocks/admin-stocks/admin-stocks.component';
+import { AdminManageUserDetailComponent } from './admins/users/admin-manage-user-detail/admin-manage-user-detail.component';
+import { AdminManageUserEditComponent } from './admins/users/admin-manage-user-edit/admin-manage-user-edit.component';
+import { AdminManageUsersComponent } from './admins/users/admin-manage-users/admin-manage-users.component';
+
 @NgModule({
   declarations: [
     AppComponent,
