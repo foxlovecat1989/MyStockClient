@@ -1,0 +1,30 @@
+<h1>Stocks Admin</h1>
+<a class="btn btn-outline-success mb-3" (click)="add()">Add</a>
+  <div class="row">
+    <div class="col-md-6">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+              <button type="button" class="btn btn-outline-primary" (click)="view(user.id)">view</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <admin-manage-user-detail *ngIf="action==='view'" [user]="selectedUser" (dataChangeEvent)="loadingData()"></admin-manage-user-detail>
+      <admin-manage-user-edit *ngIf="action==='edit' || action==='add'" [user]="selectedUser" (dataChangeEvent)="loadingData()"></admin-manage-user-edit>
+    </div>
+  </div>
+  <div class="bg-light p-4" *ngIf="isLoadingData">{{ message }}</div>

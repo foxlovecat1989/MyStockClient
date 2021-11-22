@@ -4,6 +4,7 @@ import { Observable, of, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Classify } from './model/Classify';
 import { Stock } from './model/Stock';
+import { User } from './model/User';
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +58,20 @@ export class DataService {
 
   public addClassify(classify: Classify): Observable<Classify> {
     return this.http.post<Classify>(environment.restUrl + '/api/v1/classifies', classify);
+  }
+
+  public findAllUsers(): Observable<Array<User>>{
+    return this.http.get<Array<User>>(environment.restUrl + '/api/v1/users/findAll')
+      .pipe(
+        map(
+          datas => {
+            const users = new Array<User>();
+            datas.forEach(data => users.push(User.fromHttp(data)))
+
+            return users;
+          }
+        )
+      );
   }
 
 }

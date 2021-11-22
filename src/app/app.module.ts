@@ -18,10 +18,10 @@ import { AdminStockEditComponent } from './admins/admin/admin-stock-edit/admin-s
 import { ClassifyDetailComponent } from './admins/admin/classify/classify-detail/classify-detail.component';
 import { ClassifyEditComponent } from './admins/admin/classify/classify-edit/classify-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AdminManageUsersComponent } from './admins/admin/admin-manage-users/admin-manage-users.component';
-import { AdminManageUserEditComponent } from './admins/admin/admin-manage-user-edit/admin-manage-user-edit.component';
-import { AdminManageUserDetailComponent } from './admins/admin/admin-manage-user-detail/admin-manage-user-detail.component';
+import { AdminManageUsersComponent } from './admins/admin/user/admin-manage-users/admin-manage-users.component';
+import { AdminManageUserDetailComponent } from './admins/admin/user/admin-manage-user-detail/admin-manage-user-detail.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AdminManageUserEditComponent } from './admins/admin/user/admin-manage-user-edit/admin-manage-user-edit.component';
 @NgModule({
   declarations: [
     AppComponent,
