@@ -4,7 +4,7 @@ import { ClassifyComponent } from './admins/classifies/classify.component';
 import { AdminStocksComponent } from './admins/stocks/admin-stocks/admin-stocks.component';
 import { AdminManageUsersComponent } from './admins/users/admin-manage-users/admin-manage-users.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { UserStocksComponent } from './users/user-stocks/user-stocks.component';
 
 const routes: Routes = [
