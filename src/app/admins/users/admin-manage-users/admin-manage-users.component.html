@@ -23,8 +23,19 @@
       </table>
     </div>
     <div class="col-md-6">
-      <admin-manage-user-detail *ngIf="action==='view'" [user]="selectedUser" (dataChangeEvent)="loadingData()"></admin-manage-user-detail>
-      <admin-manage-user-edit *ngIf="action==='edit' || action==='add'" [user]="selectedUser" (dataChangeEvent)="loadingData()"></admin-manage-user-edit>
+      <admin-manage-user-detail
+          *ngIf="action==='view'"
+          [user]="selectedUser"
+          (dataChangeEvent)="loadingData()"
+        >
+      </admin-manage-user-detail>
+      <admin-manage-user-edit
+          *ngIf="action==='edit' || action==='add'"
+          [user]="selectedUser"
+          (dataChangeEvent)="loadingData()"
+          [action]="action"
+      >
+      </admin-manage-user-edit>
     </div>
   </div>
   <div class="bg-light p-4" *ngIf="isLoadingData">{{ message }}</div>

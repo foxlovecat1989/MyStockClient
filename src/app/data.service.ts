@@ -74,4 +74,17 @@ export class DataService {
       );
   }
 
+  public removeUser(id: number): Observable<any>{
+    return this.http.delete<any>(environment.restUrl + '/api/v1/users/' + id);
+  }
+
+  public editUser(user: User): Observable<User>{
+    return this.http.patch<User>(environment.restUrl + '/api/v1/users', user);
+  }
+
+  public addUser(user: User, password: string): Observable<User>{
+    const fullUser = {id : user.id, 'username' : user.username, email : user.email, password : password };
+    console.log(fullUser)
+    return this.http.post<User>(environment.restUrl + '/api/v1/users', fullUser);
+  }
 }

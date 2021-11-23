@@ -12,7 +12,7 @@ import { User } from 'src/app/model/User';
 export class AdminManageUsersComponent implements OnInit {
 
   users!: Array<User>;
-  message = '';
+  message = 'Loading Data, please wait...';
   isLoadingData = true;
   selectedUser!: User;
   action!: string;
@@ -33,12 +33,12 @@ export class AdminManageUsersComponent implements OnInit {
     this.dataService.findAllUsers().subscribe(
       users => {
         this.users = users;
-
+        this.loadingQueryParams();
+        this.isLoadingData = false;
+        this.message = '';
       },
       error => this.message = 'Fail to get users...'
     );
-
-    this.loadingQueryParams();
   }
 
   private loadingQueryParams() {
@@ -46,11 +46,12 @@ export class AdminManageUsersComponent implements OnInit {
       params => {
         const id = params['id'];
         this.action = params['action'];
-        if (id) {
+        if (id)
           this.selectedUser = this.users.find(user => user.id === +id)!;
-        } else {
+        else{
           this.selectedUser = new User();
         }
+
       }
     );
   }
@@ -59,12 +60,8 @@ export class AdminManageUsersComponent implements OnInit {
     this.router.navigate(['admins', 'users'], {queryParams: {action: 'view', id: id}});
   }
 
-  edit(id: number){
-    this.router.navigate(['admins', 'users'], {queryParams: {action: 'edit', id: id}});
-  }
-
   add(){
-
+    this.router.navigate(['admins', 'users'], {queryParams: {action: 'add'}});
   }
 
 }

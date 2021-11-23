@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { DataService } from 'src/app/data.service';
 import { User } from 'src/app/model/User';
 
 @Component({
@@ -13,9 +15,35 @@ export class AdminManageUserDetailComponent implements OnInit {
   @Output('dataChangeEvent')
   dataChangeEvent = new EventEmitter();
 
-  constructor() { }
+  message = 'Loading Data, please wait...';
+
+  constructor(
+    private router: Router,
+    private dataService: DataService
+  ) { }
 
   ngOnInit(): void {
+
+  }
+
+  edit(){
+    this.router.navigate(['admins', 'users'], {queryParams: {action: 'edit', id: this.user.id}});
+  }
+
+  delete(){
+    this.message = 'Deleting Data, please wait...';
+    this.dataService.removeUser(this.user.id).subscribe(
+      next => {
+        this.dataChangeEvent.emit();
+        this.router.navigate(['admins', 'users']);
+      },
+      error => {
+        if(error.status === 500)
+          this.message = "This user cannot be deleted...";
+        else
+          this.message = "Something went wrong, please try again...";
+      }
+    );
   }
 
 }

@@ -1,1 +1,30 @@
-<p>admin-manage-user-detail works!</p>
+<div *ngIf="user">
+  <h1>{{ user?.username }}</h1>
+    <div class="row">
+      <div class="col-md-4">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{ user?.id }}</td>
+              <td>{{ user?.username }}</td>
+              <td>{{ user?.email }}</td>
+              <td>
+                <button type="button" class="btn btn-secondary" (click)="edit()">Modify</button>
+              </td>
+              <td>
+                <button type="button" class="btn btn-danger" (click)="delete()">Remove</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>
+<div class="bg-light p-3" *ngIf="user == null">{{ message }}</div>

@@ -16,7 +16,7 @@ export class AdminStockDetailComponent implements OnInit {
 
   @Output('dataReloadEvent')
   dataReloadEvent = new EventEmitter();
-
+  @Input('message')
   message = '';
 
   constructor(
