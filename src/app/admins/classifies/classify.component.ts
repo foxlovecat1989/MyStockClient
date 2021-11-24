@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DataService } from 'src/app/data.service';
 import { Classify } from 'src/app/model/Classify';
 import { Stock } from 'src/app/model/Stock';
+import { ClassifyService } from 'src/app/services/ClassifyService/classify.service';
 
 @Component({
   selector: 'app-classify',
@@ -21,7 +21,7 @@ export class ClassifyComponent implements OnInit {
   toChildMessage = '';
 
   constructor(
-    private dataService: DataService,
+    private classifyService: ClassifyService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) { }
@@ -31,7 +31,7 @@ export class ClassifyComponent implements OnInit {
   }
 
   public loadingData() {
-    this.dataService.getClassifies().subscribe(
+    this.classifyService.getClassifies().subscribe(
       classify => {
         this.isLoadingData = false;
         this.message = '';
@@ -68,10 +68,8 @@ export class ClassifyComponent implements OnInit {
   add(){
     this.router.navigate(['admins', 'classifies'], {queryParams: {action: 'add'}});
   }
-
-
   private getStocksByClassifyId() {
-    this.dataService.findStocksByClassifyId(this.selectedClassify.classifyId).subscribe(
+    this.classifyService.findStocksByClassifyId(this.selectedClassify.classifyId).subscribe(
       stocks => {
         this.stocks = stocks;
         this.isChildLoadingData = false;

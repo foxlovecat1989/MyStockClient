@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DataService } from 'src/app/data.service';
 import { User } from 'src/app/model/User';
+import { UserService } from 'src/app/services/UserService/user-service';
+import { UsernameValidators } from 'src/app/common/Validators/users/username.validators';
+import { PasswordValidators } from 'src/app/common/Validators/users/password.validators';
 
 @Component({
   selector: 'admin-manage-user-edit',
@@ -20,10 +22,11 @@ export class AdminManageUserEditComponent implements OnInit {
   message = '';
   userForm!: FormGroup;
   password = '';
+  confirmPassword = '';
 
   constructor(
     private formBuilder: FormBuilder,
-    private dataService: DataService,
+    private userService: UserService,
     private router: Router
   ) { }
 
@@ -34,17 +37,20 @@ export class AdminManageUserEditComponent implements OnInit {
   private initForm() {
     this.userForm = this.formBuilder.group({
       id: this.user.id,
-      userName: this.user.username,
-      email: this.user.email,
-      password: this.password
-    });
+      userName: [this.user.username, [Validators.required, UsernameValidators.cannotContainSpace]],
+      email: [this.user.email, [Validators.required, Validators.email]],
+      password: [this.password, [Validators.required, Validators.minLength(4)]],
+      confirmPassword: [this.confirmPassword, Validators.required]
+    },{validator: PasswordValidators.passwordShouldMatch});
   }
+
 
   save(){
     this.user.username = this.userForm.controls['userName'].value;
     this.user.email = this.userForm.controls['email'].value;
     this.message = 'Saving data, please wait...';
     this.password = this.userForm.controls['password'].value;
+    this.confirmPassword = this.userForm.controls['confirmPassword'].value;
     if(this.user.id)
       this.saveEditUser();
     else{
@@ -55,7 +61,7 @@ export class AdminManageUserEditComponent implements OnInit {
 
 
   private saveEditUser() {
-    this.dataService.editUser(this.user).subscribe(
+    this.userService.editUser(this.user).subscribe(
       user => {
         this.user = user;
         this.dataChangeEvent.emit();
@@ -66,7 +72,7 @@ export class AdminManageUserEditComponent implements OnInit {
   }
 
   private saveAddUser() {
-    this.dataService.addUser(this.user, this.password).subscribe(
+    this.userService.addUser(this.user, this.password).subscribe(
       user => {
         this.user = user;
         this.dataChangeEvent.emit();

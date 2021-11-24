@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DataService } from 'src/app/data.service';
 import { Classify } from 'src/app/model/Classify';
+import { ClassifyService } from 'src/app/services/ClassifyService/classify.service';
 
 @Component({
   selector: 'classify-edit',
@@ -22,7 +22,7 @@ export class ClassifyEditComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private dataService: DataService,
+    private classifyService: ClassifyService,
     private router: Router
     ) { }
 
@@ -51,7 +51,7 @@ export class ClassifyEditComponent implements OnInit {
   }
 
   private saveEditClassify(){
-    this.dataService.updateClassify(this.classify).subscribe(
+    this.classifyService.updateClassify(this.classify).subscribe(
       classify => {
         this.classify = classify;
         this.dataChangeEvent.emit();
@@ -62,7 +62,7 @@ export class ClassifyEditComponent implements OnInit {
   }
 
   private saveAddClassify(){
-    this.dataService.addClassify(this.classify).subscribe(
+    this.classifyService.addClassify(this.classify).subscribe(
       classify => {
         this.classify = classify;
         this.dataChangeEvent.emit();

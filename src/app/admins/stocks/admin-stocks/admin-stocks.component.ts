@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DataService } from 'src/app/data.service';
 import { Stock } from 'src/app/model/Stock';
+import { StockService } from 'src/app/services/StockService/stock.service';
 @Component({
   selector: 'admin-stocks',
   templateUrl: './admin-stocks.component.html',
@@ -15,7 +15,7 @@ export class AdminStocksComponent implements OnInit {
   message = 'Loading data, please wait...';
 
   constructor(
-    private dataService: DataService,
+    private stockService: StockService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {}
@@ -43,7 +43,7 @@ export class AdminStocksComponent implements OnInit {
   }
 
   public loadingData() {
-    this.dataService.getStocks().subscribe(
+    this.stockService.getStocks().subscribe(
       stocks => {
         this.stocks = stocks;
         this.isLoadingData = false;

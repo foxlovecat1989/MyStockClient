@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DataService } from 'src/app/data.service';
 import { Classify } from 'src/app/model/Classify';
 import { Stock } from 'src/app/model/Stock';
+import { ClassifyService } from 'src/app/services/ClassifyService/classify.service';
+import { StockService } from 'src/app/services/StockService/stock.service';
 
 @Component({
   selector: 'admin-stock-edit',
@@ -24,7 +25,8 @@ export class AdminStockEditComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private dataService: DataService,
+    private stockService: StockService,
+    private classifyService: ClassifyService,
     private router: Router
     ) { }
 
@@ -34,7 +36,7 @@ export class AdminStockEditComponent implements OnInit {
   }
 
   private loadingData() {
-    this.dataService.getClassifies().subscribe(
+    this.classifyService.getClassifies().subscribe(
       classifies => {
         this.classifies = classifies;
         this.initForm();
@@ -74,7 +76,7 @@ export class AdminStockEditComponent implements OnInit {
 
 
   private saveEditStock() {
-    this.dataService.updateStock(this.stock).subscribe(
+    this.stockService.updateStock(this.stock).subscribe(
       stock => {
         this.stock = stock;
         this.dataReloadEvent.emit();
@@ -85,7 +87,7 @@ export class AdminStockEditComponent implements OnInit {
   }
 
   private saveAddStock() {
-    this.dataService.addStock(this.stock).subscribe(
+    this.stockService.addStock(this.stock).subscribe(
       stock => {
         this.stock = stock;
         this.dataReloadEvent.emit();

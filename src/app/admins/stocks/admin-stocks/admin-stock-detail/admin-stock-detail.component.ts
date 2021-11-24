@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataService } from 'src/app/data.service';
 import { Stock } from 'src/app/model/Stock';
+import { StockService } from 'src/app/services/StockService/stock.service';
 
 
 @Component({
@@ -20,7 +20,7 @@ export class AdminStockDetailComponent implements OnInit {
   message = '';
 
   constructor(
-    private dataService: DataService,
+    private stockService: StockService,
     private router: Router
     ) { }
 
@@ -33,7 +33,7 @@ export class AdminStockDetailComponent implements OnInit {
 
   delete(){
     this.message = 'Deleting data, please wait...';
-    this.dataService.deleteStock(this.stock.id).subscribe(
+    this.stockService.deleteStock(this.stock.id).subscribe(
       data => {
         this.dataReloadEvent.emit();
         this.router.navigate(['admins', 'stocks']);

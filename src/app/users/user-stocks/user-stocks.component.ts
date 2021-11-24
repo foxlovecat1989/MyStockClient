@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DataService } from 'src/app/data.service';
 import { Stock } from 'src/app/model/Stock';
+import { StockService } from 'src/app/services/StockService/stock.service';
 
 @Component({
   selector: 'app-user-stocks',
@@ -15,7 +15,7 @@ export class UserStocksComponent implements OnInit {
   selectedStockId!: number;
 
   constructor(
-    private dataService: DataService,
+    private stockService: StockService,
     private activatedRoute: ActivatedRoute,
     private route: Router
     ) { }
@@ -32,7 +32,7 @@ export class UserStocksComponent implements OnInit {
         this.action = params['action'];
         if (id) {
           this.selectedStockId = id;
-          this.dataService.addStockToWatch(this.selectedStockId, 1, 1).subscribe(
+          this.stockService.addStockToWatch(this.selectedStockId, 1, 1).subscribe(
             next => {
               // TODO: Add data to server
               console.log('Added Success');
@@ -47,7 +47,7 @@ export class UserStocksComponent implements OnInit {
   }
 
   private loadingData() {
-    this.dataService.getStocks().subscribe(
+    this.stockService.getStocks().subscribe(
       stocks => {
         this.stocks = stocks;
       },

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataService } from 'src/app/data.service';
 import { User } from 'src/app/model/User';
+import { UserService } from 'src/app/services/UserService/user-service';
 
 @Component({
   selector: 'admin-manage-user-detail',
@@ -19,7 +19,7 @@ export class AdminManageUserDetailComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private dataService: DataService
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -32,7 +32,7 @@ export class AdminManageUserDetailComponent implements OnInit {
 
   delete(){
     this.message = 'Deleting Data, please wait...';
-    this.dataService.removeUser(this.user.id).subscribe(
+    this.userService.removeUser(this.user.id).subscribe(
       next => {
         this.dataChangeEvent.emit();
         this.router.navigate(['admins', 'users']);

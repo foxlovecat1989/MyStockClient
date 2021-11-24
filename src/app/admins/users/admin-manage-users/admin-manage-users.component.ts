@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DataService } from 'src/app/data.service';
 import { User } from 'src/app/model/User';
+import { UserService } from 'src/app/services/UserService/user-service';
 
 @Component({
   selector: 'admin-manage-users',
@@ -18,7 +18,7 @@ export class AdminManageUsersComponent implements OnInit {
   action!: string;
 
   constructor(
-    private dataService: DataService,
+    private userService: UserService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) { }
@@ -30,7 +30,7 @@ export class AdminManageUsersComponent implements OnInit {
 
 
   loadingData() {
-    this.dataService.findAllUsers().subscribe(
+    this.userService.findAllUsers().subscribe(
       users => {
         this.users = users;
         this.loadingQueryParams();
