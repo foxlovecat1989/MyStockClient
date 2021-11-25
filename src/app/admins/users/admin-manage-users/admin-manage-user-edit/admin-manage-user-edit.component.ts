@@ -39,7 +39,7 @@ export class AdminManageUserEditComponent implements OnInit {
       id: this.user.id,
       userName: [this.user.username, [Validators.required, UsernameValidators.cannotContainSpace]],
       email: [this.user.email, [Validators.required, Validators.email]],
-      password: [this.password, [Validators.required, Validators.minLength(4)]],
+      password: [this.password, [Validators.required, Validators.minLength(8)]],
       confirmPassword: [this.confirmPassword, Validators.required]
     },{validator: PasswordValidators.passwordShouldMatch});
   }
