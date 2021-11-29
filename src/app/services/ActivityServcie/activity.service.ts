@@ -29,7 +29,7 @@ export class ActivityService {
   }
 
   public editActivity(activity: Activity): Observable<Activity>{
-    return this.http.patch<Activity>(environment.restUrl + '/api/v1/activities/', activity);
+    return this.http.put<Activity>(environment.restUrl + '/api/v1/activities/', activity);
   }
 
   public createActivity(activity: Activity): Observable<Activity>{
