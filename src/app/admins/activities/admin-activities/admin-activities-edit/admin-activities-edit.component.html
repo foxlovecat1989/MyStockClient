@@ -1,0 +1,42 @@
+<div *ngIf="message != null ">
+  <h1> {{activity.id == null ? 'Create' : 'Edit'}} activity</h1>
+  <div>
+    <form [formGroup]="activityForm">
+      <div class="form-group mb-3">
+        <label for="id" class="form-label">ID</label>
+        <input class="form-control" type="text" id="id" placeholder="id" formControlName="id" aria-label="id" readonly>
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="name" formControlName="name">
+        <div class="alert alert-danger" *ngIf="activityForm.controls['name'].invalid && activityForm.controls['name'].touched">
+          <div *ngIf="activityForm.get('activityName')?.hasError('required')">Name is required.</div>
+        </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input type="text" class="form-control" id="location" placeholder="location" formControlName="location">
+        <div class="alert alert-danger" *ngIf="activityForm.controls['location'].invalid && activityForm.controls['location'].touched">
+          <div *ngIf="activityForm.get('location')?.hasError('required')">Location is required.</div>
+        </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="startTime">Start Time</label>
+        <input type="time" class="form-control" id="startTime" name="startTime"  formControlName="startTime">
+      </div>
+
+      <h2>Type:</h2>
+      <div class="form-group mb-3">
+        <select formControlName="activityType">
+          <option *ngFor="let activityType of keysOfActivityType" [ngValue]="activityType">{{ activityType }}</option>
+        </select>
+      </div>
+
+      <button type="button" class="btn btn-primary" (click)="save()" [disabled]="activityForm.invalid">Save</button>
+    </form>
+  </div>
+</div>
+<div class="bg-light p-3" *ngIf="message != ''">{{ message }}</div>

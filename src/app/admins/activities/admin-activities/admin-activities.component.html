@@ -1,0 +1,30 @@
+<h1>Activity Admin</h1>
+<a class="btn btn-outline-success mb-3" (click)="create()">Create</a>
+  <div class="row">
+    <div class="col-md-5">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let activity of activities">
+            <td>{{ activity.id }}</td>
+            <td>{{ activity.startDate }}</td>
+            <td>{{ activity.name }}</td>
+            <td>
+              <button type="button" class="btn btn-outline-primary" (click)="view(activity.id)">View</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-7">
+      <admin-activtities-detail *ngIf="action==='view'" [activity]="selectedActivity" (dataReloadEvent)="loadingData()"></admin-activtities-detail>
+      <admin-activities-edit *ngIf="action==='edit' || action==='add'" [activity]="selectedActivity" (dataReloadEvent)="loadingData()"></admin-activities-edit>
+    </div>
+  </div>
+  <div class="bg-light p-4" *ngIf="isLoadingData">{{ message }}</div>

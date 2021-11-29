@@ -21,6 +21,9 @@ import { AdminManageUserDetailComponent } from './admins/users/admin-manage-user
 import { AdminManageUserEditComponent } from './admins/users/admin-manage-users/admin-manage-user-edit/admin-manage-user-edit.component';
 import { AdminManageUsersComponent } from './admins/users/admin-manage-users/admin-manage-users.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { AdminActivitiesComponent } from './admins/activities/admin-activities/admin-activities.component';
+import { AdminActivitiesEditComponent } from './admins/activities/admin-activities/admin-activities-edit/admin-activities-edit.component';
+import { AdminActivtitiesDetailComponent } from './admins/activities/admin-activities/admin-activtities-detail/admin-activtities-detail.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,10 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     AdminManageUsersComponent,
     AdminManageUserEditComponent,
     AdminManageUserDetailComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    AdminActivitiesComponent,
+    AdminActivitiesEditComponent,
+    AdminActivtitiesDetailComponent
   ],
   imports: [
     BrowserModule,

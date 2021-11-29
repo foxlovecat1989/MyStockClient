@@ -1,0 +1,40 @@
+<div *ngIf="activity != null">
+  <h1>{{ activity.name + ' - '}} {{activity.getStartDateAsDate() | date:'yyyy-MM-dd'}}</h1>
+    <div class="row">
+      <div class="col-md-8">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Date</th>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Location</th>
+              <th>Limit</th>
+              <th>Start</th>
+              <th>End</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{ activity.id }}</td>
+              <td>{{ activity.startDate }}</td>
+              <td>{{ activity.name }}</td>
+              <td>{{ activity.activityType }}</td>
+              <td>{{ activity.location }}</td>
+              <td>{{ activity.limitAmount }}</td>
+              <td>{{ activity.startTime }}</td>
+              <td>{{ activity.endTime }}</td>
+              <td>
+                <button type="button" class="btn btn-secondary" (click)="edit()">Edit</button>
+              </td>
+              <td>
+                <button type="button" class="btn btn-danger" (click)="delete()">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="message != ''">{{ message }}</div>
