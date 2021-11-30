@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Classify } from 'src/app/model/Classify';
-import { ClassifyService } from 'src/app/services/ClassifyService/classify.service';
+import { ClassifyService } from 'src/app/services/classify.service';
 
 @Component({
   selector: 'classify-edit',

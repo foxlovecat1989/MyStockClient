@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Activity } from 'src/app/model/Activity';
-import { ActivityService } from 'src/app/services/ActivityServcie/activity.service';
-import { ActivityTypeService } from 'src/app/services/ActivityTypeService/activity-type.service';
+import { ActivityService } from 'src/app/services/activity.service';
+import { ActivityTypeService } from 'src/app/services/activity-type.service';
 import { FormResetService } from 'src/app/services/form-reset.service';
 
 @Component({

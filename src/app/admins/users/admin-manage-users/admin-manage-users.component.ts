@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/model/User';
-import { UserService } from 'src/app/services/UserService/user-service';
+import { UserService } from 'src/app/services/user-service';
 
 @Component({
   selector: 'admin-manage-users',

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Stock } from 'src/app/model/Stock';
-import { StockService } from 'src/app/services/StockService/stock.service';
+import { StockService } from 'src/app/services/stock.service';
 
 
 @Component({

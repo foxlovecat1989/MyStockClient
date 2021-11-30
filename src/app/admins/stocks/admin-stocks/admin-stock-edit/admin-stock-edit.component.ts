@@ -3,8 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { Classify } from 'src/app/model/Classify';
 import { Stock } from 'src/app/model/Stock';
-import { ClassifyService } from 'src/app/services/ClassifyService/classify.service';
-import { StockService } from 'src/app/services/StockService/stock.service';
+import { ClassifyService } from 'src/app/services/classify.service';
+import { StockService } from 'src/app/services/stock.service';
 
 @Component({
   selector: 'admin-stock-edit',

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Stock } from 'src/app/model/Stock';
-import { StockService } from 'src/app/services/StockService/stock.service';
+import { StockService } from 'src/app/services/stock.service';
 @Component({
   selector: 'admin-stocks',
   templateUrl: './admin-stocks.component.html',
