@@ -25,11 +25,11 @@ export class ActivityService {
   }
 
   public deleteActivity(id: number): Observable<any>{
-    return this.http.delete<any>(environment.restUrl + '/api/v1/activities/delete/' + id);
+    return this.http.delete<any>(environment.restUrl + '/api/v1/activities/' + id);
   }
 
   public editActivity(activity: Activity): Observable<Activity>{
-    return this.http.put<Activity>(environment.restUrl + '/api/v1/activities/', activity);
+    return this.http.patch<Activity>(environment.restUrl + '/api/v1/activities/', activity);
   }
 
   public createActivity(activity: Activity): Observable<Activity>{

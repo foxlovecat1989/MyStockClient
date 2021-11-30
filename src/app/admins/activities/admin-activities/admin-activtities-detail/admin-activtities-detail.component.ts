@@ -29,6 +29,7 @@ export class AdminActivtitiesDetailComponent implements OnInit {
     this.activityService.deleteActivity(this.activity.id).subscribe(
       next => {
         this.message = '';
+        this.dataReloadEvent.emit();
         this.router.navigate(['admins', 'activities']);
       },
       error => this.message = 'Sorry, this activitiy cannot be deleted...'

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Activity } from 'src/app/model/Activity';
 import { ActivityService } from 'src/app/services/ActivityServcie/activity.service';
+import { FormResetService } from 'src/app/services/form-reset.service';
 
 @Component({
   selector: 'admin-activities',
@@ -19,7 +20,8 @@ export class AdminActivitiesComponent implements OnInit {
   constructor(
     private activityService: ActivityService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private formResetService: FormResetService
   ) { }
 
   ngOnInit(): void {
@@ -47,8 +49,10 @@ export class AdminActivitiesComponent implements OnInit {
         this.action = params['action'];
         if (id) // under edit mode
           this.selectedActivity = this.activities.find(activity => activity.id === +id)!;
-        else
+        else {
           this.selectedActivity = new Activity();
+          this.formResetService.resetActivityFormEvent.emit(this.selectedActivity);
+        }
       }
     );
   }

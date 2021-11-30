@@ -1,16 +1,18 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Activity } from 'src/app/model/Activity';
 import { ActivityService } from 'src/app/services/ActivityServcie/activity.service';
 import { ActivityTypeService } from 'src/app/services/ActivityTypeService/activity-type.service';
+import { FormResetService } from 'src/app/services/form-reset.service';
 
 @Component({
   selector: 'admin-activities-edit',
   templateUrl: './admin-activities-edit.component.html',
   styleUrls: ['./admin-activities-edit.component.css']
 })
-export class AdminActivitiesEditComponent implements OnInit {
+export class AdminActivitiesEditComponent implements OnInit, OnDestroy {
 
   @Input('activity')
   activity!: Activity;
@@ -20,19 +22,30 @@ export class AdminActivitiesEditComponent implements OnInit {
   message= 'Loading Data, please wait...';
   activityForm!: FormGroup;
   keysOfActivityType!: Array<string>;
+  resetEventSubscription!: Subscription;
 
 
   constructor(
     private formBuilder: FormBuilder,
     private activityTypeService: ActivityTypeService,
     private activityService: ActivityService,
-    private router: Router
+    private router: Router,
+    private formResetService: FormResetService
     ) { }
 
   ngOnInit(): void {
     this.initForm();
+    this.resetEventSubscription = this.formResetService.resetActivityFormEvent.subscribe(
+      activity => {
+        this.activity = activity;
+        this.initForm();
+      }
+    );
   }
 
+  ngOnDestroy(): void {
+    this.resetEventSubscription.unsubscribe();
+  }
 
   private initForm() {
     this.keysOfActivityType = this.activityTypeService.getKeysOfActivityType();
@@ -54,11 +67,10 @@ export class AdminActivitiesEditComponent implements OnInit {
     this.activity.name = this.activityForm.controls['name'].value;
     this.activity.location = this.activityForm.controls['location'].value;
     this.activity.startDate = this.activityForm.controls['startDate'].value;
-    this.activity.startTime = (<string>(this.activityForm.controls['startTime'].value)).replace(':00', '');
-    this.activity.endTime = (<string>(this.activityForm.controls['endTime'].value)).replace(':00', '');
+    this.activity.startTime = (<string>(this.activityForm.controls['startTime'].value)).slice(0, 5);
+    this.activity.endTime = (<string>(this.activityForm.controls['endTime'].value)).slice(0, 5);
     this.activity.limitAmount = this.activityForm.controls['limitAmount'].value;
     this.activity.activityType = this.activityForm.controls['activityType'].value;
-
     if(this.activity.id)
       this.saveEdit();
     else
