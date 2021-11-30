@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Activity } from 'src/app/model/Activity';
-import { ActivityService } from 'src/app/services/ActivityServcie/activity.service';
+import { ActivityService } from 'src/app/services/activity.service';
 
 @Component({
   selector: 'admin-activtities-detail',

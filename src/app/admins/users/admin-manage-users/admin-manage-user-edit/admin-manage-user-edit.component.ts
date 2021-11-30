@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/model/User';
-import { UserService } from 'src/app/services/UserService/user-service';
+import { UserService } from 'src/app/services/user-service';
 import { UsernameValidators } from 'src/app/common/Validators/users/username.validators';
 import { PasswordValidators } from 'src/app/common/Validators/users/password.validators';
 
