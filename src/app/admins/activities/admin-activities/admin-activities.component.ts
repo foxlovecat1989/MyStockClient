@@ -31,8 +31,8 @@ export class AdminActivitiesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadingData();
-    if(this.authService.role === 'ADMIN')
-      this.isAdmin = true;
+    // if(this.authService.role === 'ADMIN')
+    //   this.isAdmin = true;
     this.loadingSetRole();
   }
 
@@ -43,6 +43,7 @@ export class AdminActivitiesComponent implements OnInit, OnDestroy {
   private loadingSetRole() {
     this.roleSetEventSubscription = this.authService.roleSetEvent.subscribe(
       next => {
+        console.log(next)
         if (next === 'ADMIN')
           this.isAdmin = true;
         else

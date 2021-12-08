@@ -23,15 +23,15 @@ export class LoginComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-      this.loadingAuthresultEvent();
-      this.authService.checkIfAlreadyAuthenticated();
+      this.loadingAuthResultEvent();
+      // this.authService.checkIfAlreadyAuthenticated();
     }
 
     ngOnDestroy(): void {
     this.subscriptionOfAuthResult.unsubscribe();
   }
 
-  private loadingAuthresultEvent() {
+  private loadingAuthResultEvent() {
     this.subscriptionOfAuthResult = this.authService.authenticationResultEvent.subscribe(
       reuslt => {
         if (reuslt) {

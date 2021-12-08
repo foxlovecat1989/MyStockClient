@@ -15,20 +15,20 @@ export class AuthService {
     private userService: UserService
   ) { }
 
-  authenticate(name: string, password: string): boolean{
-    this.userService.validateUser(name, password).subscribe(
-      next => {
+  authenticate(name: string, password: string) {
+    this.userService.validateUser(name,password).subscribe(
+      next=> {
         this.setupRole();
         this.isAuthenticated = true;
-        this.authenticationResultEvent.emit(this.isAuthenticated);
+        this.authenticationResultEvent.emit(true);
       },
-      error => {
+      error =>
+      {
         this.isAuthenticated = false;
-        this.authenticationResultEvent.emit(this.isAuthenticated);
+        this.authenticationResultEvent.emit(false);
       }
     );
 
-    return this.isAuthenticated;
   }
 
   private setupRole() : void {

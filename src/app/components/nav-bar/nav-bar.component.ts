@@ -10,7 +10,8 @@ import { AuthService } from 'src/app/services/auth.service';
 export class NavBarComponent implements OnInit {
 
   isUserLogin = false;
-  
+  userIsLoggedIn = false;
+
   constructor(
     private route: Router,
     private authService: AuthService
@@ -19,7 +20,9 @@ export class NavBarComponent implements OnInit {
   ngOnInit(): void {
     if(this.authService.isAuthenticated)
       this.isUserLogin = true;
-
+    this.authService.authenticationResultEvent.subscribe(
+      next => this.userIsLoggedIn = next
+    );
   }
 
   navigateAdminStocks(){
