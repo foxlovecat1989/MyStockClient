@@ -8,6 +8,7 @@ export class AuthService {
 
   isAuthenticated = false;
   authenticationResultEvent = new EventEmitter<boolean>();
+  jwtToken!: string;
 
   constructor(
     private userService: UserService
@@ -16,6 +17,8 @@ export class AuthService {
   authenticate(name: string, password: string): boolean{
     this.userService.validateUser(name, password).subscribe(
       next => {
+        this.jwtToken = next.result;
+        console.log(this.jwtToken);
         this.isAuthenticated = true;
         this.authenticationResultEvent.emit(this.isAuthenticated);
       },
