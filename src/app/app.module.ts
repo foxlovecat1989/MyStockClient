@@ -24,6 +24,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { AdminActivitiesComponent } from './admins/activities/admin-activities/admin-activities.component';
 import { AdminActivitiesEditComponent } from './admins/activities/admin-activities/admin-activities-edit/admin-activities-edit.component';
 import { AdminActivtitiesDetailComponent } from './admins/activities/admin-activities/admin-activtities-detail/admin-activtities-detail.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { AdminActivtitiesDetailComponent } from './admins/activities/admin-activ
     PageNotFoundComponent,
     AdminActivitiesComponent,
     AdminActivitiesEditComponent,
-    AdminActivtitiesDetailComponent
+    AdminActivtitiesDetailComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

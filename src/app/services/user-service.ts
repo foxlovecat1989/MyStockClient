@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { User } from 'src/app/model/User';
@@ -42,6 +42,13 @@ export class UserService {
     const user = new User();
     user.email = email;
     return this.http.post<boolean>(environment.restUrl + '/api/v1/users/register/check', user);
+  }
+
+
+  validateUser(name: string, password: string): Observable<string>{
+    const authData = btoa(`${name}:${password}`);
+    const headers = new HttpHeaders().append('Authorization', 'Basic ' + authData);
+    return this.http.get<string>(environment.restUrl + '/api/v1/basicAuth/validate', {headers: headers});
   }
 
 
