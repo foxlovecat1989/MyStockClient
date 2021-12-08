@@ -50,8 +50,8 @@ export class AuthService {
     this.userService.getRole().subscribe(
       next => {
         if(next.role !== ''){
-          // this.role = next.role;
-          // this.roleSetEvent.emit(next.role);
+          this.role = next.role;
+          this.roleSetEvent.emit(next.role);
           this.isAuthenticated = true;
           this.authenticationResultEvent.emit(true);
         }
