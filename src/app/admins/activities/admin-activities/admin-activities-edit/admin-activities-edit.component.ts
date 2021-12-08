@@ -24,7 +24,7 @@ export class AdminActivitiesEditComponent implements OnInit, OnDestroy {
   activityForm!: FormGroup;
   keysOfActivityType!: Array<string>;
   resetEventSubscription!: Subscription;
-  
+
 
 
   constructor(
@@ -81,7 +81,7 @@ export class AdminActivitiesEditComponent implements OnInit, OnDestroy {
   }
 
   private saveEdit() {
-    this.activityService.editActivityT(this.activity, this.authService.jwtToken).subscribe(
+    this.activityService.editActivity(this.activity).subscribe(
       activity => {
         this.activity = activity;
         this.message = '';

@@ -48,7 +48,16 @@ export class UserService {
   validateUser(name: string, password: string): Observable<{result: string}>{
     const authData = btoa(`${name}:${password}`);
     const headers = new HttpHeaders().append('Authorization', 'Basic ' + authData);
-    return this.http.get<{result: string}>(environment.restUrl + '/api/v1/basicAuth/validate', {headers: headers});
+    return this.http.get<{result: string}>(environment.restUrl + '/api/v1/basicAuth/validate', {headers: headers, withCredentials: true});
+  }
+
+  getRole() : Observable<{role : string}>{
+    const headers = new HttpHeaders().append("X-Requested-With", "XMLHttpRequest");
+    return this.http.get<{role : string}>(environment.restUrl + '/api/v1/users/currentUserRole', {headers, withCredentials : true});
+  }
+
+  logout() : Observable<string>{
+    return this.http.get<string>(environment.restUrl + '/api/v1/users/logout', {withCredentials : true});
   }
 
 

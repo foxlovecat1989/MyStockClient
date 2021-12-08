@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Activity } from 'src/app/model/Activity';
 import { ActivityService } from 'src/app/services/activity.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -10,7 +11,7 @@ import { FormResetService } from 'src/app/services/form-reset.service';
   templateUrl: './admin-activities.component.html',
   styleUrls: ['./admin-activities.component.css']
 })
-export class AdminActivitiesComponent implements OnInit {
+export class AdminActivitiesComponent implements OnInit, OnDestroy {
 
   activities!: Array<Activity>;
   selectedActivity!: Activity;
@@ -18,6 +19,7 @@ export class AdminActivitiesComponent implements OnInit {
   message = 'Loading Data, please wait...';
   action!: string;
   isAdmin = false;
+  roleSetEventSubscription!: Subscription;
 
   constructor(
     private activityService: ActivityService,
@@ -29,12 +31,30 @@ export class AdminActivitiesComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadingData();
-    if(this.authService.getRole() === 'ADMIN')
+    if(this.authService.role === 'ADMIN')
       this.isAdmin = true;
+    this.loadingSetRole();
   }
 
+  ngOnDestroy(): void {
+    this.roleSetEventSubscription.unsubscribe();
+  }
+
+  private loadingSetRole() {
+    this.roleSetEventSubscription = this.authService.roleSetEvent.subscribe(
+      next => {
+        if (next === 'ADMIN')
+          this.isAdmin = true;
+        else
+          this.isAdmin = false;
+      }
+    );
+  }
+
+
+
   public loadingData(){
-    this.activityService.getActivitiesT(this.authService.jwtToken).subscribe(
+    this.activityService.getActivities().subscribe(
       actitites => {
         this.activities = actitites;
         this.message = '';

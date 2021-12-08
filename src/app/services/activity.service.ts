@@ -13,21 +13,7 @@ export class ActivityService {
 
   public getActivities(): Observable<Array<Activity>> {
 
-    return this.http.get<Array<Activity>>(environment.restUrl + '/api/v1/activities/findAll').pipe(
-      map(
-        datas => {
-          const activities = new Array<Activity>();
-          datas.forEach(data => activities.push(Activity.fromHttp(data)))
-
-          return activities;
-        }
-      )
-    );
-  }
-
-  public getActivitiesT(token: string): Observable<Array<Activity>> {
-    const headers = new HttpHeaders().append('Authorization', 'Bearer ' + token);
-    return this.http.get<Array<Activity>>(environment.restUrl + '/api/v1/activities/findAll', {headers}).pipe(
+    return this.http.get<Array<Activity>>(environment.restUrl + '/api/v1/activities/findAll', {withCredentials: true}).pipe(
       map(
         datas => {
           const activities = new Array<Activity>();
@@ -44,13 +30,9 @@ export class ActivityService {
   }
 
   public editActivity(activity: Activity): Observable<Activity>{
-    return this.http.patch<Activity>(environment.restUrl + '/api/v1/activities/', activity);
+    return this.http.patch<Activity>(environment.restUrl + '/api/v1/activities/', activity, {withCredentials: true});
   }
 
-  public editActivityT(activity: Activity, token: string): Observable<Activity>{
-    const headers = new HttpHeaders().append('Authorization', 'Bearer ' + token);
-    return this.http.patch<Activity>(environment.restUrl + '/api/v1/activities/', activity, {headers});
-  }
 
   public createActivity(activity: Activity): Observable<Activity>{
     return this.http.post<Activity>(environment.restUrl + '/api/v1/activities/', activity);

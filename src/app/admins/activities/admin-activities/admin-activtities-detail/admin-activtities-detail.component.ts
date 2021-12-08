@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Activity } from 'src/app/model/Activity';
 import { ActivityService } from 'src/app/services/activity.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -17,6 +18,8 @@ export class AdminActivtitiesDetailComponent implements OnInit {
   dataReloadEvent = new EventEmitter();
   message = '';
   isAdmin = false;
+  roleSetEventSubscription!: Subscription;
+
   constructor(
     private router: Router,
     private activityService: ActivityService,
@@ -24,8 +27,24 @@ export class AdminActivtitiesDetailComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    if(this.authService.getRole() === 'ADMIN')
+    if(this.authService.role === 'ADMIN')
       this.isAdmin = true;
+      this.loadingSetRole();
+  }
+
+  ngOnDestroy(): void {
+    this.roleSetEventSubscription.unsubscribe();
+  }
+
+  private loadingSetRole() {
+    this.roleSetEventSubscription = this.authService.roleSetEvent.subscribe(
+      next => {
+        if (next === 'ADMIN')
+          this.isAdmin = true;
+        else
+          this.isAdmin = false;
+      }
+    );
   }
 
   delete(){
