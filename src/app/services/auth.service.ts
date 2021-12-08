@@ -31,4 +31,15 @@ export class AuthService {
     return this.isAuthenticated;
   }
 
+  getRole(): string | null{
+    if(this.jwtToken == null)
+      return null;
+
+     const encodedPayload = this.jwtToken.split('.')[1];
+     const payload = atob(encodedPayload);
+
+    return JSON.parse(payload).role;
+  }
+
+
 }

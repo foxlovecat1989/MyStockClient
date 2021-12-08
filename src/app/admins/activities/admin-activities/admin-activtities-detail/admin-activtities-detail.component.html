@@ -26,10 +26,10 @@
               <td>{{ activity.startTime }}</td>
               <td>{{ activity.endTime }}</td>
               <td>
-                <button type="button" class="btn btn-secondary" (click)="edit()">Edit</button>
+                <button type="button" class="btn btn-secondary" (click)="edit()" *ngIf="isAdmin">Edit</button>
               </td>
               <td>
-                <button type="button" class="btn btn-danger" (click)="delete()">Delete</button>
+                <button type="button" class="btn btn-danger" (click)="delete()" *ngIf="isAdmin">Delete</button>
               </td>
             </tr>
           </tbody>

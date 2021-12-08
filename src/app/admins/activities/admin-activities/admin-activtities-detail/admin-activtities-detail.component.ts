@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Activity } from 'src/app/model/Activity';
 import { ActivityService } from 'src/app/services/activity.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'admin-activtities-detail',
@@ -15,13 +16,16 @@ export class AdminActivtitiesDetailComponent implements OnInit {
   @Output('dataReloadEvent')
   dataReloadEvent = new EventEmitter();
   message = '';
-
+  isAdmin = false;
   constructor(
     private router: Router,
-    private activityService: ActivityService
+    private activityService: ActivityService,
+    private authService: AuthService
     ) { }
 
   ngOnInit(): void {
+    if(this.authService.getRole() === 'ADMIN')
+      this.isAdmin = true;
   }
 
   delete(){

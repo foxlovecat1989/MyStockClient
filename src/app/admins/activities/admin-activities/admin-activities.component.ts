@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Activity } from 'src/app/model/Activity';
 import { ActivityService } from 'src/app/services/activity.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { FormResetService } from 'src/app/services/form-reset.service';
 
 @Component({
@@ -16,20 +17,24 @@ export class AdminActivitiesComponent implements OnInit {
   isLoadingData = true;
   message = 'Loading Data, please wait...';
   action!: string;
+  isAdmin = false;
 
   constructor(
     private activityService: ActivityService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private formResetService: FormResetService
+    private formResetService: FormResetService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
     this.loadingData();
+    if(this.authService.getRole() === 'ADMIN')
+      this.isAdmin = true;
   }
 
   public loadingData(){
-    this.activityService.getActivities().subscribe(
+    this.activityService.getActivitiesT(this.authService.jwtToken).subscribe(
       actitites => {
         this.activities = actitites;
         this.message = '';

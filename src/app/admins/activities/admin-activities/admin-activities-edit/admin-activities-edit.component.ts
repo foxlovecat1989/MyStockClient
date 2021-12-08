@@ -6,6 +6,7 @@ import { Activity } from 'src/app/model/Activity';
 import { ActivityService } from 'src/app/services/activity.service';
 import { ActivityTypeService } from 'src/app/services/activity-type.service';
 import { FormResetService } from 'src/app/services/form-reset.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'admin-activities-edit',
@@ -23,6 +24,7 @@ export class AdminActivitiesEditComponent implements OnInit, OnDestroy {
   activityForm!: FormGroup;
   keysOfActivityType!: Array<string>;
   resetEventSubscription!: Subscription;
+  
 
 
   constructor(
@@ -30,7 +32,8 @@ export class AdminActivitiesEditComponent implements OnInit, OnDestroy {
     private activityTypeService: ActivityTypeService,
     private activityService: ActivityService,
     private router: Router,
-    private formResetService: FormResetService
+    private formResetService: FormResetService,
+    private authService: AuthService
     ) { }
 
   ngOnInit(): void {
@@ -78,7 +81,7 @@ export class AdminActivitiesEditComponent implements OnInit, OnDestroy {
   }
 
   private saveEdit() {
-    this.activityService.editActivity(this.activity).subscribe(
+    this.activityService.editActivityT(this.activity, this.authService.jwtToken).subscribe(
       activity => {
         this.activity = activity;
         this.message = '';
